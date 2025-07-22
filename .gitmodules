@@ -1,6 +1,6 @@
 [submodule "libfizmo"]
 	path = libfizmo
-	url = https://github.com/qt-brlefebv/libfizmo
+	url = git@github.com:qt-brlefebv/libfizmo
 [submodule "libdrilbo"]
 	path = libdrilbo
 	url = https://github.com/chrender/libdrilbo
@@ -12,7 +12,10 @@
 	url = https://github.com/qt-brlefebv/fizmo-console
 [submodule "fizmo-ncursesw"]
 	path = fizmo-ncursesw
-	url = https://github.com/qt-brlefebv/fizmo-ncursesw
+	url = git@github.com:qt-brlefebv/fizmo-console
+[submodule "fizmo-ncursesw"]
+	path = fizmo-ncursesw
+	url = git@github.com:qt-brlefebv/fizmo-ncursesw
 [submodule "fizmo-glktermw"]
 	path = fizmo-glktermw
 	url = https://github.com/chrender/fizmo-glktermw
