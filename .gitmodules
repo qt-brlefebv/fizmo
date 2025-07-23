@@ -12,9 +12,6 @@
 	url = https://github.com/qt-brlefebv/fizmo-console
 [submodule "fizmo-ncursesw"]
 	path = fizmo-ncursesw
-	url = git@github.com:qt-brlefebv/fizmo-console
-[submodule "fizmo-ncursesw"]
-	path = fizmo-ncursesw
 	url = git@github.com:qt-brlefebv/fizmo-ncursesw
 [submodule "fizmo-glktermw"]
 	path = fizmo-glktermw
