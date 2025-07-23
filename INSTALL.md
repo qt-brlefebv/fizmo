@@ -49,11 +49,18 @@ The source code in the master fizmo “master” branch on github does not conta
 
 ## Basic Installation
 
-Installing should be as simple as running the following commands:
+First off, make sure you initialize the submodules:
 
+`git submodule update --init`
+
+After that, installing should be as simple as running the following commands:
+
+```
+autoreconf -fi # (if `configure` is not present)
 ./configure  
 make  
 make install
+```
 
 The “configure” script tries to guess the correct values for all the system settings and locations of all include files and libraries. If some files cannot be found, the script will ask for the required values.
 
