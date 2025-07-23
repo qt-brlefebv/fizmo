@@ -1,10 +1,6 @@
+# Installation Instructions
 
-
-**Installation Instructions**  
-
-
-
-
+## Minimum Prerequisites
 
 The following minimum components need to be installed to build fizmo:
 
@@ -15,6 +11,7 @@ The following minimum components need to be installed to build fizmo:
  - pkg-config
 
 
+## Prerequisites For All Frontends
 
 To build all of the frontends, you will need the following in addition to the components listed abobe:     
 
@@ -28,6 +25,7 @@ To build all of the frontends, you will need the following in addition to the co
  - freetype2
 
 
+## Debian-based Distribution Prerequisite Installation
 
 If you are on Debian or any derivate like Ubuntu you can execute the following commands to install all of the required components:
 
@@ -36,6 +34,7 @@ If you are on Debian or any derivate like Ubuntu you can execute the following c
  - `apt-get install libsndfile1-dev libjpeg-dev libpng-dev libfreetype6-dev`
 
 
+## macOS Prerequisite Installation
 
 In case you're on Mac OS X, you can use homebrew to install the build requirements:
 
@@ -43,8 +42,12 @@ In case you're on Mac OS X, you can use homebrew to install the build requiremen
  - `brew install libjpeg autoconf libsndfile automake`
 
 
+## Working with Autoconf and Automake
 
 The source code in the master fizmo “master” branch on github does not contain the `configure` script. If you want to install from github instead from a downloaded fizmo-\*.tar.gz you can either run the `autoreconf -fi` command to create the missing files, or clone the “upstream” branch which contains the release-relevant files.
+
+
+## Basic Installation
 
 Installing should be as simple as running the following commands:
 
@@ -54,40 +57,43 @@ make install
 
 The “configure” script tries to guess the correct values for all the system settings and locations of all include files and libraries. If some files cannot be found, the script will ask for the required values.
 
-In addition to the standard parameters, “configure” provides the following options:
+## Out-Of-Source / VPATH Build and Installation
 
-`--`enable-tracing  
-For debugging purposes, fizmo can write very extensive logging information into a file named “tracelog.txt”. The logging can be enabled using this option. See also the “`--`with-glktermw-includedir” and “`--`with-glktermw-libdir” parameters below.
+To build out-of-source (or in autoconf parlance, doing a "VPATH" build), you can issue the following commands from the base of the repository:
 
-`--`enable-glktermw  
-Fizmo provides experimental GLK support, which can be activated using this option.
+```
+autoreconf -fi
+if [[ -e out/build/debug ]]; then rm out/build/debug -Rf; fi && mkdir -p out/build/debug && (cd out/build/debug && ../../../configure --prefix=$(realpath -m $PWD/../../install/debug) --disable-sdl --disable-x11 --disable-jpeg --disable-png --enable-tracing && make && make install)
+```
 
-`--`disable-x11  
-This option will disable X11 image display in fizmo-ncursesw.
+This will build fizmo-console and fizmo-ncurses. Out-of-source build for the other variants (removing some of the configure options above) is possible, but requires pulling forked repositories from github.com/keithel.
 
-`--`disable-jpeg  
-In case JPEG support is not available or not desired, this option will disable libdrilbo's JPEG capabilities.
 
-`--`disable-png  
-In case PNG support is not available or not desired, this option will disable libdrilbo's PNG capabilities.
+## Configure Options
 
-`--`disable-sdl  
-In case SDL2 is not available, you can still build fizmo using this option. However, there will be no sound or SDL frontend available.
+In addition to the standard parameters, `configure` provides the following options:
 
-`--`disable-aiff  
-In case libsndfile1 is is not available or no AIFF support is required, this option will disable AIFF support.
+`--enable-tracing` : For debugging purposes, fizmo can write very extensive logging information into a file named “tracelog.txt”. The logging can be enabled using this option. See also the “`--`with-glktermw-includedir” and “`--`with-glktermw-libdir” parameters below.
 
-`--`with-jpeg-includedir  
-If pkg-config cannot provide information about libjpeg, the location of the jpeglib.h can be given using this parameter.
+`--enable-glktermw` : Fizmo provides experimental GLK support, which can be activated using this option.
 
-`--`with-jpeg-libdir  
-If pkg-config cannot provide information about libjpeg, the location of the libjpeg can be given using this parameter.
+`--disable-x11` : This option will disable X11 image display in fizmo-ncursesw.
 
-`--`with-glktermw-includedir  
-In case glktermw should be build, the location of the include files must be given using this parameter.
+`--disable-jpeg` : In case JPEG support is not available or not desired, this option will disable libdrilbo's JPEG capabilities.
 
-`--`with-glktermw-libdir  
-In case glktermw should be build, the location of the library file must be given using this parameter.
+`--disable-png` : In case PNG support is not available or not desired, this option will disable libdrilbo's PNG capabilities.
+
+`--disable-sdl` : In case SDL2 is not available, you can still build fizmo using this option. However, there will be no sound or SDL frontend available.
+
+`--disable-aiff` : In case libsndfile1 is is not available or no AIFF support is required, this option will disable AIFF support.
+
+`--with-jpeg-includedir`: If pkg-config cannot provide information about libjpeg, the location of the jpeglib.h can be given using this parameter.
+
+`--with-jpeg-libdir` : If pkg-config cannot provide information about libjpeg, the location of the libjpeg can be given using this parameter.
+
+`--with-glktermw-includedir` : In case glktermw should be build, the location of the include files must be given using this parameter.
+
+`--with-glktermw-libdir` : In case glktermw should be build, the location of the library file must be given using this parameter.
 
 Strictly speaking it would be possible build fizmo without pkg-config by compiling all the necessary modules yourself instead of letting the distribution package do this for you. Since pkg-config should however be universally available, there shouldn't be any need to do this.
 
